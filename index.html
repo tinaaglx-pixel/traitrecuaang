@@ -6,7 +6,7 @@
     <title>Trại trẻ của Ang</title>
     <!-- Font Google cute & bo góc mềm mại -->
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome cho icon tìm kiếm -->
+    <!-- FontAwesome cho icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -31,7 +31,7 @@
             color: var(--text-main);
             display: flex;
             justify-content: center;
-            padding: 40px 20px;
+            padding: 40px 20px 80px 20px;
             min-height: 100vh;
         }
 
@@ -96,7 +96,27 @@
             transform: scale(1.03);
         }
 
-        /* 3. SECTION: Title + Search */
+        /* 3. SECTION: Coming Soon */
+        .coming-soon-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            border-style: dashed;
+        }
+        .coming-soon-badge {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 2px;
+        }
+        .coming-soon-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        /* 4. SECTION: Title + Search */
         .section-divider {
             text-align: center;
             width: 100%;
@@ -138,7 +158,7 @@
             margin-left: 10px;
         }
 
-        /* 4. SECTION: Categories (Phân loại) */
+        /* 5. SECTION: Categories */
         .categories-container {
             display: flex;
             gap: 8px;
@@ -163,7 +183,7 @@
             color: #FFFFFF;
         }
 
-        /* 5. SECTION: Character List (Tên char) */
+        /* 6. SECTION: Character Cards */
         .char-list {
             width: 100%;
             display: flex;
@@ -173,20 +193,11 @@
         }
         .char-item {
             background-color: var(--bg-card);
-            padding: 20px;
+            padding: 24px 20px;
             border-radius: 25px;
             text-align: center;
             box-shadow: 0 6px 15px rgba(201, 143, 158, 0.1);
-            border: 2px solid transparent;
-            transition: all 0.2s ease;
-            cursor: pointer;
-            text-decoration: none;
-            display: block;
-        }
-        .char-item:hover {
-            border-color: var(--accent);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(201, 143, 158, 0.25);
+            border: 2px solid rgba(201, 143, 158, 0.2);
         }
         .char-name {
             font-size: 24px;
@@ -199,6 +210,7 @@
             gap: 8px;
             justify-content: center;
             flex-wrap: wrap;
+            margin-bottom: 16px;
         }
         .char-tag {
             font-size: 12px;
@@ -207,6 +219,77 @@
             padding: 4px 12px;
             border-radius: 12px;
             font-weight: 600;
+        }
+
+        /* Nút G.Ai và DK */
+        .links-container {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+        .platform-btn {
+            background-color: var(--bg-secondary);
+            color: var(--text-main);
+            padding: 8px 24px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            border: 2px solid var(--accent);
+            transition: all 0.2s ease;
+            display: inline-block;
+        }
+        .platform-btn:hover {
+            background-color: var(--accent);
+            color: #FFFFFF;
+            transform: translateY(-2px);
+        }
+        .platform-btn.disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* Nút nhạc floating xinh xắn */
+        .music-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 48px;
+            height: 48px;
+            background-color: var(--bg-card);
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(201, 143, 158, 0.3);
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+        .music-btn:hover {
+            transform: scale(1.1);
+        }
+        .music-btn.playing {
+            animation: spin 4s linear infinite;
+            background-color: var(--accent);
+            color: #FFFFFF;
+        }
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Trình phát YouTube ẩn */
+        #youtube-player {
+            position: fixed;
+            top: -9999px;
+            left: -9999px;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            pointer-events: none;
         }
     </style>
 </head>
@@ -226,7 +309,13 @@
             <button class="btn-random" onclick="rollRandomChar()">🎲 Pick Random Char</button>
         </div>
 
-        <!-- 3. Title & Search -->
+        <!-- 3. COMING SOON -->
+        <div class="card-box coming-soon-card">
+            <div class="coming-soon-badge">✦ COMING SOON ✦</div>
+            <div class="coming-soon-name">Bùi Trạch Ngôn</div>
+        </div>
+
+        <!-- 4. Title & Search -->
         <div class="section-divider">
             <div class="section-title">✦ THE CHILDREN ✦</div>
             <div class="search-box">
@@ -235,7 +324,7 @@
             </div>
         </div>
 
-        <!-- 4. Chỗ phân loại (Categories) -->
+        <!-- 5. Phân loại (Categories) -->
         <div class="categories-container">
             <button class="cat-btn active" onclick="filterCategory('all', this)">Tất cả</button>
             <button class="cat-btn" onclick="filterCategory('BL', this)">BL</button>
@@ -243,26 +332,82 @@
             <button class="cat-btn" onclick="filterCategory('cún con', this)">Cún con</button>
         </div>
 
-        <!-- 5. Danh sách nhân vật -->
+        <!-- 6. Danh sách nhân vật -->
         <div class="char-list" id="charList">
-            <!-- Dữ liệu được render tự động qua Javascript -->
+            <!-- Dữ liệu render qua Javascript -->
         </div>
 
     </div>
 
+    <!-- YouTube Player ẩn & Nút điều khiển -->
+    <div id="youtube-player"></div>
+    <button class="music-btn" id="musicToggle" onclick="toggleMusic()" title="Bật/Tắt Nhạc Chill">
+        <i class="fa-solid fa-music"></i>
+    </button>
+
+    <!-- Nhúng API của YouTube -->
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script>
-        // Danh sách nhân vật (Đã gắn link cho Kane Aoki)
+        let player;
+        let isPlaying = false;
+        let playerReady = false;
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                height: '1',
+                width: '1',
+                videoId: '01dn67QubYQ',
+                playerVars: {
+                    'autoplay': 0,
+                    'controls': 0,
+                    'loop': 1,
+                    'playlist': '01dn67QubYQ',
+                    'playsinline': 1
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            playerReady = true;
+        }
+
+        function onPlayerStateChange(event) {
+            if (event.data == YT.PlayerState.PLAYING) {
+                isPlaying = true;
+                document.getElementById('musicToggle').classList.add('playing');
+            } else {
+                isPlaying = false;
+                document.getElementById('musicToggle').classList.remove('playing');
+            }
+        }
+
+        function toggleMusic() {
+            if (!player || !playerReady) return;
+            if (isPlaying) {
+                player.pauseVideo();
+            } else {
+                player.playVideo();
+            }
+        }
+
+        // Danh sách nhân vật
         const characters = [
             { 
                 name: "Kane Aoki", 
                 tags: ["BL", "Niên Hạ", "cún con"],
-                link: "https://www.dokichat.club/vi/role/a3c8da81-c34d-4049-9bc8-8fb7dddbe4e9?isShare=true"
+                links: {
+                    gai: "#",
+                    dk: "https://www.dokichat.club/vi/role/a3c8da81-c34d-4049-9bc8-8fb7dddbe4e9?isShare=true"
+                }
             }
         ];
 
         let currentCategory = 'all';
 
-        // Render danh sách nhân vật
         function renderCharacters(items) {
             const container = document.getElementById('charList');
             container.innerHTML = '';
@@ -273,22 +418,31 @@
             }
 
             items.forEach(char => {
-                const item = document.createElement('a');
+                const item = document.createElement('div');
                 item.className = 'char-item';
-                item.href = char.link || '#';
-                item.target = '_blank'; // Mở trong tab mới
                 
                 const tagsHtml = char.tags.map(tag => `<span class="char-tag">#${tag}</span>`).join('');
                 
+                const gaiBtn = char.links.gai && char.links.gai !== '#' 
+                    ? `<a href="${char.links.gai}" target="_blank" class="platform-btn">G.Ai</a>`
+                    : `<a href="#" onclick="alert('Link G.Ai sắp ra mắt!'); return false;" class="platform-btn disabled">G.Ai</a>`;
+
+                const dkBtn = char.links.dk && char.links.dk !== '#'
+                    ? `<a href="${char.links.dk}" target="_blank" class="platform-btn">DK</a>`
+                    : `<a href="#" onclick="alert('Link DK sắp ra mắt!'); return false;" class="platform-btn disabled">DK</a>`;
+
                 item.innerHTML = `
                     <div class="char-name">${char.name}</div>
                     <div class="tags-container">${tagsHtml}</div>
+                    <div class="links-container">
+                        ${gaiBtn}
+                        ${dkBtn}
+                    </div>
                 `;
                 container.appendChild(item);
             });
         }
 
-        // Chức năng Random Character
         function rollRandomChar() {
             if (characters.length === 0) return;
             const randomIndex = Math.floor(Math.random() * characters.length);
@@ -296,7 +450,6 @@
             document.getElementById('randomResult').innerText = `✨ ${chosen.name} ✨`;
         }
 
-        // Chức năng Phân loại (Category)
         function filterCategory(category, btnElement) {
             currentCategory = category;
             
@@ -306,7 +459,6 @@
             filterCharacters();
         }
 
-        // Chức năng Search (Tìm kiếm)
         function filterCharacters() {
             const searchText = document.getElementById('searchInput').value.toLowerCase();
 
@@ -322,7 +474,6 @@
             renderCharacters(filtered);
         }
 
-        // Khởi tạo hiển thị
         renderCharacters(characters);
     </script>
 </body>
