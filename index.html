@@ -203,7 +203,15 @@
             font-size: 24px;
             font-weight: 700;
             color: var(--text-main);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
+        }
+        .char-quote {
+            font-size: 13px;
+            font-style: italic;
+            color: var(--text-sub);
+            margin-bottom: 12px;
+            line-height: 1.4;
+            padding: 0 10px;
         }
         .tags-container {
             display: flex;
@@ -397,10 +405,11 @@
         // Danh sách nhân vật
         const characters = [
             { 
-                name: "Kane Aoki", 
+                name: "Kane Aoki",
+                quote: "“Đi mà ôm ấp con nhỏ kia đi. Tìm thằng không danh phận như tôi làm gì?”",
                 tags: ["BL", "Niên Hạ", "cún con"],
                 links: {
-                    gai: "#",
+                    gai: "https://aistudio.google.com/app/prompts?state=%7B%22ids%22:%5B%221m3aln2J_KjH8JofcUrXlnkEQjpmN29vS%22%5D,%22action%22:%22open%22,%22userId%22:%22104828631681528173873%22,%22resourceKeys%22:%7B%7D%7D&usp=sharing",
                     dk: "https://www.dokichat.club/vi/role/a3c8da81-c34d-4049-9bc8-8fb7dddbe4e9?isShare=true"
                 }
             }
@@ -422,6 +431,7 @@
                 item.className = 'char-item';
                 
                 const tagsHtml = char.tags.map(tag => `<span class="char-tag">#${tag}</span>`).join('');
+                const quoteHtml = char.quote ? `<div class="char-quote">${char.quote}</div>` : '';
                 
                 const gaiBtn = char.links.gai && char.links.gai !== '#' 
                     ? `<a href="${char.links.gai}" target="_blank" class="platform-btn">G.Ai</a>`
@@ -433,6 +443,7 @@
 
                 item.innerHTML = `
                     <div class="char-name">${char.name}</div>
+                    ${quoteHtml}
                     <div class="tags-container">${tagsHtml}</div>
                     <div class="links-container">
                         ${gaiBtn}
@@ -464,6 +475,7 @@
 
             const filtered = characters.filter(char => {
                 const matchesSearch = char.name.toLowerCase().includes(searchText) || 
+                                      (char.quote && char.quote.toLowerCase().includes(searchText)) ||
                                       char.tags.some(t => t.toLowerCase().includes(searchText));
                 
                 const matchesCategory = currentCategory === 'all' || char.tags.includes(currentCategory);
