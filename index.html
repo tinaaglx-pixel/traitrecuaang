@@ -67,6 +67,27 @@
             line-height: 1.5;
         }
 
+        /* Nút Gửi gắm tâm tư */
+        .btn-ngl {
+            display: inline-block;
+            background-color: var(--bg-secondary);
+            color: var(--text-main);
+            border: 2px solid var(--accent);
+            padding: 12px 28px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(201, 143, 158, 0.1);
+            transition: all 0.2s ease;
+        }
+        .btn-ngl:hover {
+            background-color: var(--accent);
+            color: #FFFFFF;
+            transform: translateY(-2px);
+        }
+
         /* 2. SECTION: Random Character System */
         .random-card {
             display: flex;
@@ -289,15 +310,18 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Trình phát YouTube ẩn */
-        #youtube-player {
+        /* Ẩn hoàn toàn khung phát YouTube trên trình duyệt TikTok */
+        .yt-wrapper {
             position: fixed;
             top: -9999px;
             left: -9999px;
             width: 1px;
             height: 1px;
+            overflow: hidden;
+            visibility: hidden;
             opacity: 0;
             pointer-events: none;
+            z-index: -9999;
         }
     </style>
 </head>
@@ -310,6 +334,11 @@
             <h1>Trại trẻ của Ang</h1>
             <p>Nơi những đứa nhóc của Ang tìm được một mái nhà ♡</p>
         </div>
+
+        <!-- Nút Gửi gắm tâm tư (NGL) -->
+        <a href="https://ngl.link/angbell96001" target="_blank" class="btn-ngl">
+            💌 Gửi gắm tâm tư
+        </a>
 
         <!-- 2. Hệ thống random char -->
         <div class="card-box random-card">
@@ -347,8 +376,12 @@
 
     </div>
 
-    <!-- YouTube Player ẩn & Nút điều khiển -->
-    <div id="youtube-player"></div>
+    <!-- Khung chứa YouTube Player ẩn hoàn toàn -->
+    <div class="yt-wrapper">
+        <div id="youtube-player"></div>
+    </div>
+
+    <!-- Nút điều khiển nhạc -->
     <button class="music-btn" id="musicToggle" onclick="toggleMusic()" title="Bật/Tắt Nhạc Chill">
         <i class="fa-solid fa-music"></i>
     </button>
@@ -362,15 +395,18 @@
 
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('youtube-player', {
-                height: '1',
-                width: '1',
+                height: '0',
+                width: '0',
                 videoId: '01dn67QubYQ',
                 playerVars: {
                     'autoplay': 0,
                     'controls': 0,
                     'loop': 1,
                     'playlist': '01dn67QubYQ',
-                    'playsinline': 1
+                    'playsinline': 1,
+                    'disablekb': 1,
+                    'fs': 0,
+                    'rel': 0
                 },
                 events: {
                     'onReady': onPlayerReady,
