@@ -117,27 +117,7 @@
             transform: scale(1.03);
         }
 
-        /* 3. SECTION: Coming Soon */
-        .coming-soon-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            border-style: dashed;
-        }
-        .coming-soon-badge {
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--accent);
-            letter-spacing: 2px;
-        }
-        .coming-soon-name {
-            font-size: 22px;
-            font-weight: 700;
-            color: var(--text-main);
-        }
-
-        /* 4. SECTION: Title + Search */
+        /* 3. SECTION: Title + Search */
         .section-divider {
             text-align: center;
             width: 100%;
@@ -179,7 +159,7 @@
             margin-left: 10px;
         }
 
-        /* 5. SECTION: Categories */
+        /* 4. SECTION: Categories */
         .categories-container {
             display: flex;
             gap: 8px;
@@ -204,7 +184,7 @@
             color: #FFFFFF;
         }
 
-        /* 6. SECTION: Character Cards */
+        /* 5. SECTION: Character Cards */
         .char-list {
             width: 100%;
             display: flex;
@@ -346,13 +326,7 @@
             <button class="btn-random" onclick="rollRandomChar()">🎲 Pick Random Char</button>
         </div>
 
-        <!-- 3. COMING SOON -->
-        <div class="card-box coming-soon-card">
-            <div class="coming-soon-badge">✦ COMING SOON ✦</div>
-            <div class="coming-soon-name">Bùi Trạch Ngôn</div>
-        </div>
-
-        <!-- 4. Title & Search -->
+        <!-- 3. Title & Search -->
         <div class="section-divider">
             <div class="section-title">✦ THE CHILDREN ✦</div>
             <div class="search-box">
@@ -361,7 +335,7 @@
             </div>
         </div>
 
-        <!-- 5. Phân loại (Categories) -->
+        <!-- 4. Phân loại (Categories) -->
         <div class="categories-container">
             <button class="cat-btn active" onclick="filterCategory('all', this)">Tất cả</button>
             <button class="cat-btn" onclick="filterCategory('BL', this)">BL</button>
@@ -370,7 +344,7 @@
             <button class="cat-btn" onclick="filterCategory('ABO', this)">ABO</button>
         </div>
 
-        <!-- 6. Danh sách nhân vật -->
+        <!-- 5. Danh sách nhân vật -->
         <div class="char-list" id="charList">
             <!-- Dữ liệu render qua Javascript -->
         </div>
